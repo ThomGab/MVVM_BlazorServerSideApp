@@ -1,0 +1,22 @@
+﻿@using WPC_App_BlazorServerSide.Helpers
+
+<div class="map-legend-item-container">
+    <div style="grid-area: friendlyLabel" class="map-legend-item-friendly">@Item.CategoryFriendly</div>
+    <div style="grid-area: categoryCode" class="map-legend-item-code">Code:(@Item.CategoryCode)</div>
+    <div style="grid-area: colourCode; background-color:@CrimeCategoryHelpers.GetColour(Item)" class="box"</div>
+    <input style="grid-area: checkMark; background-color:@CrimeCategoryHelpers.GetColour(Item)" type="checkbox" @bind="Item.IsSelected" @onclick="(async ()=>await UpdateSelectedCategory())" />
+</div>
+
+@code {
+    [Inject]
+    ICrimeData_ViewModel ViewModel { get; set; }
+
+    [Parameter]
+    public CrimeCategoryModel Item { get; set; }
+
+    public async Task UpdateSelectedCategory()
+    {
+        Item.IsSelected = (!Item.IsSelected);
+        await ViewModel.OnCrimeCategorySelectionUpdated();
+    }
+}

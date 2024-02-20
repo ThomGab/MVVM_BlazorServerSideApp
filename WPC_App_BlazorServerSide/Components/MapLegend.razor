@@ -1,0 +1,11 @@
+﻿@using WPC_App_BlazorServerSide.Helpers
+@inherits MapLegendComponentBase
+
+<h3>MapLegend</h3>
+
+<div class="map-legend-container">
+    @foreach (var item in CrimeCategories)
+    {
+        <MapLegendItem Item=item></MapLegendItem>
+    }
+</div>

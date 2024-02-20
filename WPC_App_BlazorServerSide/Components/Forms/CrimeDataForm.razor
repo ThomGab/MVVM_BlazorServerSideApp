@@ -1,0 +1,23 @@
+﻿@inject ICrimeData_ViewModel ViewModel;
+@inject ILogger<CrimeDataForm> logger
+@inherits CrimeDataFormBase
+
+<h3>InputData</h3>
+
+<EditForm Model="@InputModel" OnInvalidSubmit="@ViewModel.InvalidFormSubmitted" OnValidSubmit="@ValidFormSubmitted">
+    <DataAnnotationsValidator />
+
+    <h4>Latitude</h4>
+    <InputTextDynamicValidation @bind-Value="@InputModel.Latitude" id="Latitude"></InputTextDynamicValidation>
+    <ValidationMessage For="() => InputModel.Latitude"></ValidationMessage>
+
+    <h4>Longitude</h4>
+    <InputTextDynamicValidation @bind-Value="@InputModel.Longitude" id="Longitude"></InputTextDynamicValidation>
+    <ValidationMessage For="() => InputModel.Longitude"></ValidationMessage>
+
+    <h4>Date</h4>
+    <DatePicker TValue="DateTime?" @bind-Date="@InputModel.Date" InputFormat="yyyy.MM" DisplayFormat="yyyy.MM"/>
+    <DatePickerValidation Form="InputModel" IsValid="DateTimeInputIsValid"></DatePickerValidation>
+
+    <button class="btn btn-primary" type="submit" disabled="@(SubmitDisabled(context, DateTimeInputIsValid))">Submit</button>
+</EditForm>

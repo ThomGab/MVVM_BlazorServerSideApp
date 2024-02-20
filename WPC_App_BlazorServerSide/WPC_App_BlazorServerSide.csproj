@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>cd4165c5-d37c-440b-a224-ed892f247f12</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\script.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Blazorise" Version="1.4.2" />
+    <PackageReference Include="Blazorise.Bootstrap" Version="1.4.2" />
+    <PackageReference Include="Blazorise.Icons.FontAwesome" Version="1.4.2" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Refit" Version="7.0.0" />
+    <PackageReference Include="Refit.HttpClientFactory" Version="7.0.0" />
+    <PackageReference Include="Syncfusion.Blazor" Version="24.2.7" />
+    <PackageReference Include="System.Resources.ResourceManager" Version="4.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Validators\DateTimeValidator\" />
+  </ItemGroup>
+
+</Project>

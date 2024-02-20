@@ -1,0 +1,22 @@
+﻿@using System.Globalization
+@inherits DateTimePickerValidationBase
+
+@if(string.IsNullOrWhiteSpace(Form.Date.ToString()))
+{
+    <p>This string is required</p>
+    IsValid = false;
+}
+
+else
+{
+    if (Form.Date > ViewModel.LatestDataDate)
+    {
+        <p> Latest Data available is dated: @ViewModel.LatestDataDate.Date.ToString("yyyy-MM", CultureInfo.InvariantCulture)</p>
+        <p> Please enter an earlier date.</p>
+        IsValid = false;
+    }
+    else
+    {
+        IsValid = true;
+    }
+}

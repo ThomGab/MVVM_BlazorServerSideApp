@@ -1,0 +1,31 @@
+﻿@inherits InputText
+
+<input @attributes="AdditionalAttributes"
+       type="text"
+       class="@CssClass"
+       value="@stringValue"
+       @oninput="OnInput"
+       @onblur="OnBlur" />
+
+@code {
+    private string stringValue = string.Empty;
+    private string lastParsedValue = string.Empty;
+
+    private void OnInput(ChangeEventArgs e)
+    {
+        // Update the value
+        CurrentValueAsString = stringValue = (string)e.Value;
+        lastParsedValue = CurrentValue;
+    }
+
+    private void OnBlur(FocusEventArgs e)
+    {
+        // Overwrite the stringValue property with the parsed value.
+        // This call Value.ToString(), so the value in the input is well formatted.
+        // note: Ensure the string value is valid before updating the content
+        if (!EditContext.GetValidationMessages(FieldIdentifier).Any())
+        {
+            stringValue = CurrentValueAsString;
+        }
+    }
+}
