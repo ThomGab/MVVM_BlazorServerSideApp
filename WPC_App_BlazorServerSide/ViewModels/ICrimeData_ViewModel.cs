@@ -22,8 +22,6 @@ namespace WPC_App_BlazorServerSide.ViewModels
 
         public Task ValidFormSubmitted(ICrimeDataInputForm crimeDataInputForm);
 
-        public void InvalidFormSubmitted(EditContext editContext);
-
         public Task Initialize();
     }
 }

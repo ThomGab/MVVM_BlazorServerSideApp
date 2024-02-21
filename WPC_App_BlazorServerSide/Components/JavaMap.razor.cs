@@ -14,10 +14,10 @@ namespace WPC_App_BlazorServerSide.Components
         /// </summary>
 
         [Inject]
-        public ICrimeData_ViewModel ViewModel { get; set; }
+        public ICrimeData_ViewModel ViewModel { get; set; } = null!;
 
         [Inject]
-        public IJSRuntime jsInteropRuntime { get; set; }
+        public IJSRuntime jsInteropRuntime { get; set; } = null!;
 
         private PropertyChangedEventHandler? handler;
 
@@ -62,16 +62,6 @@ namespace WPC_App_BlazorServerSide.Components
             await jsInteropRuntime.InvokeVoidAsync("clearAllMarkers");
         }
 
-        private async Task CreateClusterMap()
-        {
-            await jsInteropRuntime.InvokeVoidAsync("createClusterMap");
-        }
-
-        private async Task ClearClustersOnMap()
-        {
-            await jsInteropRuntime.InvokeVoidAsync("clearClusterMap");
-        }
-
         private async Task DisplayMarkersOnMap()
         {
             await jsInteropRuntime.InvokeVoidAsync("displayAllMarkers");
@@ -106,9 +96,6 @@ namespace WPC_App_BlazorServerSide.Components
             }
         }
 
-        public void Dispose()
-        {
-            ViewModel.PropertyChanged -= handler;
-        }
+        public void Dispose() => ViewModel.PropertyChanged -= handler;
     }
 }

@@ -9,7 +9,7 @@
 
 @code {
     [Inject]
-    ICrimeData_ViewModel ViewModel { get; set; }
+    ICrimeData_ViewModel ViewModel { get; set; } = null!;
 
     [Parameter]
     public CrimeCategoryModel Item { get; set; }

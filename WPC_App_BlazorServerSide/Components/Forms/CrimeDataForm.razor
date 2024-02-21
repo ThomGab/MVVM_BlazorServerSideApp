@@ -2,7 +2,7 @@
 @inject ILogger<CrimeDataForm> logger
 @inherits CrimeDataFormBase
 
-<EditForm Model="@InputModel" OnInvalidSubmit="@ViewModel.InvalidFormSubmitted" OnValidSubmit="@ValidFormSubmitted">
+<EditForm Model="@InputModel" OnValidSubmit="@ValidFormSubmitted">
     <DataAnnotationsValidator />
 
     <h4>Latitude</h4>

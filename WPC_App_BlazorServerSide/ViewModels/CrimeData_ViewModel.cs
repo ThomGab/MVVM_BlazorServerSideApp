@@ -12,41 +12,30 @@ namespace WPC_App_BlazorServerSide.ViewModels
     {
         private readonly ICrimeDataInputModel inputModel;
         private readonly ICrimeDataService crimeDataService;
-        private readonly IMapModel mapModel;
         private List<CrimeDataModel> crimeData = new();
         private List<CrimeDataModel> crimeDataDisplayed = new();
         private IReadOnlyList<CrimeCategoryModel> crimeCategories;
         private List<CrimeCategoryModel> crimeCategoriesSelected = new();
         private DateTimeOffset latestDataDate = new();
 
-        public CrimeData_ViewModel(ICrimeDataService crimeDataService, ICrimeDataInputModel inputModel, IMapModel mapModel)
+        public CrimeData_ViewModel(ICrimeDataService crimeDataService, ICrimeDataInputModel inputModel)
         {
             this.inputModel = inputModel;
             this.crimeDataService = crimeDataService;
-            this.mapModel = mapModel;
         }
 
         //private List<CrimeDataResponse> crimeData = new();
         public ICrimeDataInputModel InputModel => this.inputModel;
 
-        public IMapModel MapModel => this.mapModel;
-
         public DateTimeOffset LatestDataDate => latestDataDate;
 
-        public IReadOnlyList<CrimeCategoryModel> CrimeCategories => crimeCategories;
-
         public ICrimeDataService CrimeDataService => crimeDataService;
-
 
         public event PropertyChangedEventHandler? PropertyChanged = null!;
 
         protected void OnPropertyChanged([CallerMemberName] string name = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
-        }
-
-        public void InvalidFormSubmitted(EditContext editContext)
-        {
         }
 
         public async Task ValidFormSubmitted(ICrimeDataInputForm inputform)
@@ -60,10 +49,12 @@ namespace WPC_App_BlazorServerSide.ViewModels
         }
 
         public List<CrimeCategoryModel> CrimeCategoriesSelected { 
-            get {
+            get 
+            {
                 return crimeCategoriesSelected; 
             } 
-            set { 
+            set 
+            { 
                 crimeCategoriesSelected = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CrimeCategoriesSelected)));
             } 
