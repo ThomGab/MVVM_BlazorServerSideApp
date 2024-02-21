@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using Blazorise;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Forms;
 using WPC_App_BlazorServerSide.ViewModels;
 
@@ -16,15 +17,35 @@ namespace WPC_App_BlazorServerSide.Components.Forms
             await ViewModel.ValidFormSubmitted(InputModel);
         }
 
-        public bool DateTimeInputIsValid { get; set; }
+        public bool DateTimeInputIsValid { get => dateTimeInputIsValid(); }
 
-        public bool SubmitDisabled(EditContext context, bool dateTimeInputIsValid)
+        private bool dateTimeInputIsValid()
         {
-            var inputHasErrorMessages = !context.GetValidationMessages().Any();
-            var inputHasBeenModified = !context.IsModified();
-            var inputHasNullOrWhitespace = !string.IsNullOrWhiteSpace(InputModel.Latitude) || !string.IsNullOrWhiteSpace(InputModel.Longitude);
+            if (string.IsNullOrWhiteSpace(InputModel.Date.ToString()))
+            {
+                return false;
+            }
 
-            return (inputHasErrorMessages || inputHasBeenModified || inputHasNullOrWhitespace || !dateTimeInputIsValid);
+            else
+            {
+                if (InputModel.Date > ViewModel.LatestDataDate)
+                {
+                    return false;
+                }
+                else
+                {
+                    return true;
+                }
+            }
+        }
+
+        public bool SubmitDisabled(EditContext context)
+        {
+            var dateTimeInputIsInvalid = !DateTimeInputIsValid;
+            var inputHasErrorMessages = context.GetValidationMessages().Any();
+            var inputHasNullOrWhitespace = string.IsNullOrWhiteSpace(InputModel.Latitude) || string.IsNullOrWhiteSpace(InputModel.Longitude);
+
+            return (inputHasErrorMessages || inputHasNullOrWhitespace || dateTimeInputIsInvalid);
         }
     }
 }

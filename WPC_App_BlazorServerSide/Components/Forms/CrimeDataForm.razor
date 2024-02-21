@@ -2,8 +2,6 @@
 @inject ILogger<CrimeDataForm> logger
 @inherits CrimeDataFormBase
 
-<h3>InputData</h3>
-
 <EditForm Model="@InputModel" OnInvalidSubmit="@ViewModel.InvalidFormSubmitted" OnValidSubmit="@ValidFormSubmitted">
     <DataAnnotationsValidator />
 
@@ -16,8 +14,8 @@
     <ValidationMessage For="() => InputModel.Longitude"></ValidationMessage>
 
     <h4>Date</h4>
-    <DatePicker TValue="DateTime?" @bind-Date="@InputModel.Date" InputFormat="yyyy.MM" DisplayFormat="yyyy.MM"/>
-    <DatePickerValidation Form="InputModel" IsValid="DateTimeInputIsValid"></DatePickerValidation>
+    <DatePicker TValue="DateTime?" @bind-Date="@InputModel.Date" InputFormat="yyyy.MM" DisplayFormat="yyyy.MM" Inline />
+    <DatePickerValidation Form="InputModel"></DatePickerValidation>
 
-    <button class="btn btn-primary" type="submit" disabled="@(SubmitDisabled(context, DateTimeInputIsValid))">Submit</button>
+    <button class="btn btn-primary" type="submit" disabled="@(SubmitDisabled(context))">Submit</button>
 </EditForm>

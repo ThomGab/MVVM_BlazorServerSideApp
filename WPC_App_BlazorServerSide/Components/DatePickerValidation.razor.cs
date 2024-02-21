@@ -5,13 +5,12 @@ using WPC_App_BlazorServerSide.ViewModels;
 
 namespace WPC_App_BlazorServerSide.Components
 {
-    public class DateTimePickerValidationBase : ComponentBase
+    public class DatePickerValidationBase : ComponentBase
     {
         [Inject]
         public ICrimeData_ViewModel ViewModel { get; set; } = null!;
 
-        [Parameter]
-        public bool IsValid { get; set; } = false;
+        public bool IsValid { get; set; }
 
         [Parameter]
         public CrimeDataInputForm Form { get; set; }

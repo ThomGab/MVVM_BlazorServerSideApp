@@ -3,13 +3,12 @@
 @using WPC_App_BlazorServerSide.Components.Forms
 
 @inject ICrimeData_ViewModel ViewModel;
-<CrimeDataForm></CrimeDataForm>
 
-<JavaMap></JavaMap>
-
-<MapLegend 
-    CrimeCategories=@ViewModel.CrimeCategoriesSelected>
-</MapLegend>
+<div style="display: grid; grid-template-areas: 'input map' 'legend legend'; grid-template-columns: 0.4fr 1fr;">
+    <div style="grid-area: input"> <CrimeDataForm/> </div>
+    <div style="grid-area: map"> <JavaMap/> </div>
+    <div style="grid-area: legend"> <MapLegend CrimeCategories=@ViewModel.CrimeCategoriesSelected /></div>
+</div>
 
 @code{
     override protected async Task OnInitializedAsync(){
